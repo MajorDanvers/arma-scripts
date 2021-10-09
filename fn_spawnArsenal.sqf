@@ -1,3 +1,43 @@
+/**
+	* Adds curated arsenal to player that disables itself under specified conditions.
+	*
+	* Faction: MJB ARMA default PMCs
+	*
+	* Usage - under initPlayerLocal.sqf
+	* 0 = execVM 'loadouts\arsenal.sqf';
+	* 
+	* New framework update by NotherDuck
+	* Formatting by veerserif
+	*
+	* v0.5 2021-08-20:
+		- Removed ACRE Radios
+		- Removed EFT Uniforms with Beltstaff Pants (White LOD Issue)
+		- Added weapons and attachments requested in framework doc.
+		- Gave all roles access to tracers where possible.
+		- Moved DMRs (M14, SR-25, SVDS) and Shortdot to seperate role (_itemWeaponDMR).
+		- Added LAT Equipment (_itemWeaponLAT).
+	* v1.0 - 2021-08-21:
+		- Fixed several typos with magazines and added some missing ones (150 rnd 7.62x54r Box)
+		- Moved shotguns and smgs to seperate section (_itemWeaponCQB, still given to all classes with normal rifles)
+		- Added section for high capacity rifle mags (_itemWeaponHighCapAmmo, given to SF)
+	* v1.1 - 2021-08-26:
+		- Added ACRE radios back to arsenal.
+		- Removed CUP lasers.
+		- Fixed some roles not having access to pistols.
+		- Added NAPA drip hoodie.
+	* v1.1a - 2021-08-31:
+		- Removed heli coveralls from normal infantry roles.
+		- Gave tank and air crews access to CQB weapons.
+	* v1.2 - 2021-09-01:
+		- Added carbine variants requested by VierLeger (VHS-K2, ACR-C, F2000 Tactical, Mk17 CQC, Mk18).
+	* v1.2a - 2021-09-14:
+		- Added the AK-104 and AK-74M.
+		- Changed AK-105 variant to B-13 version (rail can be removed using CTRL+C by default to access dovetail sights)
+		- Fixed LAT and HAT roles having access to binoculars.
+	* v1.3 – 2021-10-08:
+		- MJB Modlist reset version.
+*/
+
 private _rifles = [
 	// 5.56
 	"arifle_Mk20_plain_F",
@@ -17,14 +57,14 @@ private _rifles = [
 	// 5.45
 	"CUP_arifle_Fort222",
 	"CUP_arifle_AK74M",
-	"CUP_arifle_AK74M_top_rail",
+	"CUP_arifle_AK74M_railed",
 	
 	// 7.62x51
 	"CUP_arifle_DSA_SA58_OSW_VFG",
 	
 	// 7.62x39
 	"CUP_arifle_AKM",
-	"CUP_arifle_AKM_top_rail"
+	"CUP_arifle_AKM_railed"
 ];
 
 private _carbines = [
@@ -272,6 +312,7 @@ private _snipers = [
 	"CUP_5Rnd_86x70_L115A1",
 	"CUP_5Rnd_127x108_KSVK_M",
 	"CUP_5Rnd_762x51_M24",
+	"greenmag_ammo_338_basic_60Rnd",
 	
 	"CUP_bipod_Harris_1A2_L_BLK",
 	"CUP_muzzle_snds_AWM",
@@ -492,12 +533,16 @@ private _baseItems = [
 	"ACE_Chemlight_HiWhite",
 	
 	// mods
+	/* borked
 	"CUP_acc_ANPEQ_15_Black",
 	"CUP_acc_ANPEQ_15_Black_Top",
 	"CUP_acc_ANPEQ_15_Flashlight_Black_L",
 	"CUP_acc_ANPEQ_15_Top_Flashlight_Black_L",
-	"CUP_acc_Flashlight",
 	"CUP_acc_LLM_black",
+	*/
+	"CUP_acc_ANPEQ_2_Flashlight_Black_L",
+	"CUP_acc_Flashlight",
+
 	
 	"CUP_bipod_Harris_1A2_L_BLK",
 	
@@ -619,7 +664,10 @@ private _hat = [
 private _hatAmmo = [
 	//"CUP_Javelin_M", 
 	"Titan_AT",
-	"Titan_AP" 
+	"Titan_AP",
+	
+	"B_Bergen_mcamo_F",
+	"B_Bergen_dgtl_F"
 ];
 
 private _airCrew = [
@@ -629,7 +677,19 @@ private _airCrew = [
 	"WU_B_HeliPilotCoveralls",
 	"WU_I_HeliPilotCoveralls",
 	"WU_O_PilotCoveralls",
-	"Toolkit"
+	"Toolkit",
+	"ACE_IR_Strobe_Item",
+	"ACRE_PRC148",
+	"ACE_Chemlight_UltraHiOrange",
+	"SmokeShellOrange"
+];
+
+private _tankCrew =
+[
+	"ACRE_PRC148",
+	"H_HelmetCrew_I",
+	"H_HelmetCrew_O",
+	"CUP_H_CZ_Helmet05"
 ];
 
 private _engineer = [
@@ -639,7 +699,32 @@ private _engineer = [
 	"APERSBoundingMine_Remote_Mag",
 	"ATMine_Range_Mag",
 	"MineDetector",
-	"Toolkit"
+	"Toolkit",
+	
+	"ACE_M14",
+	"ACE_wirecutter",
+	"ACE_EntrenchingTool",
+	"ACE_DeadManSwitch",
+	"ACE_DefusalKit",
+	"ACE_FlareTripMine_Mag",
+	"APERSTripMine_Wire_Mag",
+	"SLAMDirectionalMine_Wire_Mag",
+	"ClaymoreDirectionalMine_Remote_Mag",
+	"TrainingMine_Mag",
+	"ACE_UAVBattery",
+	"ACE_SpraypaintBlack",
+	"ACE_Rope36",
+	"ACE_Rope15",
+	"ACE_Chemlight_HiBlue",
+	"ACE_Chemlight_HiYellow",
+	"ACE_Chemlight_UltraHiOrange",
+	"B_UAV_01_backpack_F",
+	"B_UGV_02_Demining_backpack_F",
+	"ACE_TacticalLadder_Pack",
+	
+	"B6SH118",
+	"B_Bergen_mcamo_F",
+	"B_Bergen_dgtl_F"
 ];
 
 private _specialForces = [
@@ -805,29 +890,25 @@ _baseItems append _tarkovuniforms;
 // _baseItems append _optic2x; // comment out for 1x only
 // _machineGuns append _magFedMGs; // comment out for belt-feds only
 
-/*
-	without TMF, roles here based on which type of unit is placed down in Eden
-	you'll have to check which types you're using and slot them in
-*/
-private _role = typeOf player;
-private _leaderRole = ["I_G_officer_F", "I_G_Soldier_SL_F", "I_G_Soldier_TL_F"];
+private _role = player getVariable ["tmf_assignGear_role",nil];
+private _leaderRole = ["tl", "sl"];
 
 arsenal = "building" createVehicleLocal [0,0,0];
 switch (true) do 
 {
-	case (_role == "I_E_Soldier_F") : // basic–so most will skip the rest of this giant switch
+	case (_role == "r") : // basic–so most will skip the rest of this giant switch
 	{
 		{_baseItems append _x;} forEach [_carbines, _rifles, _rifleAmmo, _pistols];
 	};
-	case (_role == "I_E_Soldier_LAT2_F") : // LAT
+	case (_role == "lat") : // LAT
 	{
 		{_baseItems append _x;} forEach [_lat, _rifleAmmo, _rifles, _carbines, _pistols];
 	};
-	case (_role == "B_Patrol_Soldier_MG_F") : //MG
+	case (_role == "ar") : //MG
 	{
 		{_baseItems append _x;} forEach [_machineGuns, _mgAmmo, _ammoCarriers, _pistols];
 	};
-	case (_role == "I_E_Soldier_AAR_F") : //MG ammobearer
+	case (_role == "aar") : //MG ammobearer
 	{
 		{_baseItems append _x;} forEach [_carbines, _rifles, _ammoCarriers, _rifleAmmo, _mgAmmo, _pistols];
 	};
@@ -835,67 +916,75 @@ switch (true) do
 	{
 		{_baseItems append _x;} forEach [_underslung, _rifleAmmo, _leaders, _pistols];
 	};
-	case (_role == "I_G_medic_F") : // medics
+	case (_role == "cls") : // medics
 	{
 		{_baseItems append _x;} forEach [_rifles, _carbines, _rifleAmmo, _medics, _pistols];
 	};
-	case (_role == "I_E_Soldier_GL_F") : // platoon sergeant
+	case (_unitRole == "crew") :
 	{
-		{_baseItems append _x;} forEach [_underslung, _rifleAmmo, _pistols];
+		{_baseItems append _x;} forEach [_smgs, _carbines, _rifleAmmo, _binocs, _pistols]; // todo: tank crew stuff
 	};
-	case (_role == "I_Soldier_AT_F") : // MAT
+	case (_role == "mat") : // MAT
 	{
 		{_baseItems append _x;} forEach [_mat, _matAmmo, _carbines, _rifles, _rifleAmmo, _ammoCarriers, _pistols];
 	};
-	case (_role == "B_G_Soldier_exp_F") : // MAT carrier
+	case (_role == "amat") : // MAT carrier
 	{
 		{_baseItems append _x;} forEach [_carbines, _rifles, _ammoCarriers, _rifleAmmo, _matAmmo, _pistols];
 	};
-	case (_role == "CUP_I_RACS_Sniper") : // Snipers
+	case (_role == "sniper") : // Snipers
 	{
 		{_baseItems append _x;} forEach [_snipers, _pistols, _binocs];
 	};
-		case (_role == "I_Spotter_F") : // Spotters and/or Sharpshooters
+		case (_role == "spotter") : // Spotters and/or Sharpshooters
 	{
 		{_baseItems append _x;} forEach [_sharpshooters, _optic2x, _pistols, _binocs];
 	};
-	case (_role == "I_E_Helipilot_F") : // Pilots
+	case (_role == "aircrew") : // Pilots
 	{
-		{_baseItems append _x;} forEach [_smgs, _pistols, _aircrew];
+		{_baseItems append _x;} forEach [_smgs, _pistols, _aircrew, ["H_PilotHelmetFighter_B"]];
 	};
-	case (_role == "I_E_Soldier_AT_F") : // HAT
+	case (_role == "helocrew") : // Pilots
+	{
+		{_baseItems append _x;} forEach [_smgs, _carbines, _rifleAmmo, _pistols, _aircrew, ["H_PilotHelmetHeli_B"]];
+	};
+	case (_role == "hat") : // HAT
 	{
 		{_baseItems append _x;} forEach [_hat, _hatAmmo, _ammoCarriers, _rifles, _carbines, _rifleAmmo, _pistols];
 	};
-	case (_role == "I_Soldier_AAT_F") : // HAT carrier
+	case (_role == "ahat") : // HAT carrier
 	{
 		{_baseItems append _x;} forEach [_hatAmmo, _ammoCarriers, _rifles, _carbines, _rifleAmmo, _pistols];
 	};
-	case (_role == "CUP_I_RACS_Medic_Urban") : // SFMedic
+	case (_unitRole == "ceng") :
+	{
+		{_baseItems append _x;} forEach [_engineer, _ammoCarriers, _shotguns, _rifles, _carbines, _rifleAmmo, _pistols];
+	};
+	case (_role == "sfmed") : // SFMedic
 	{
 		{_baseItems append _x;} forEach [_lat, _manpad, _specialForces, _rifles, _carbines, _rifleAmmo, _pistols, _medics, _optic2x];
 	};
-	case (_role == "CUP_I_RACS_RoyalCommando") : // SFLead
+	case (_role == "sfsl") : // SFLead
 	{
 		{_baseItems append _x;} forEach [_lat, _manpad, _specialForces, _underslung, _rifleAmmo, _pistols, _ammoCarriers, _optic2x, _leaders];
 	};
-	case (_role == "CUP_I_RACS_RoyalMarksman") : // SFMarksman
+	case (_role == "sfdmr") : // SFMarksman
 	{
 		{_baseItems append _x;} forEach [_lat, _manpad, _specialForces, _sharpshooters, _pistols, _ammoCarriers, _leaders];
 	};
-	case (_role == "CUP_I_RACS_RoyalGuard") : // SF MG
+	case (_role == "sfar") : // SF MG
 	{
 		{_baseItems append _x;} forEach [_lat, _manpad, _specialForces, _machineGuns, _optic2x, _mgAmmo, _magFedMGs, _pistols, _ammoCarriers];
 	};
-	case (_role == "CUP_I_RACS_MAT_Urban") : // SF MAT
+	case (_role == "sfmat") : // SF MAT
 	{
 		{_baseItems append _x;} forEach [_mat, _matAmmo, _specialForces, _rifles, _carbines, _rifleAmmo, _pistols, _ammoCarriers, _optic2x];
 	};
-	case (_role == "I_support_Mort_F") : // mortar lead
+	case (_role == "mrtl") : // mortar lead
 	{
 		{_baseItems append _x;} forEach [_smgs, _carbines, _rifleAmmo, _pistols, _ammoCarriers, _mortar, ["ACRE_PRC148"]];
 	};
-	case (_role == "I_support_AMort_F") : // mortar assistant
+	case (_role == "mrta") : // mortar assistant
 	{
 		{_baseItems append _x;} forEach [_smgs, _carbines, _rifleAmmo, _pistols, _ammoCarriers, _mortar];
 	};
