@@ -51,11 +51,13 @@ private _grp = [_startingPos, _side, _group] call BIS_fnc_spawnGroup;
 {_x moveInAny _veh} forEach (units _grp);
 private _wp = _grp addWaypoint [_unloadPos, 1];
 _wp setWaypointType _unloadType;
+_wp setWaypointBehaviour "CARELESS";
 if (_unloadType == "GETOUT") then {
 	// attempt to prevent get-in get-out FSM loops
 	_wp setWaypointStatements ["true", "this leaveVehicle assignedVehicle (leader this);"];
 };
 
 _wp = _grp addWaypoint [_targetPos, 1];
+_wp setWaypointBehaviour "AWARE";
 _wp setWaypointStatements ["true", "[this, 500, 29] spawn lambs_wp_fnc_taskRush;"];
 [_veh, _grp];
