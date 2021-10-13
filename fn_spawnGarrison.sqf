@@ -18,14 +18,14 @@
 		5: (Optional, default true) Boolean - Teleport to positions
 		6: Position – Position to spawn group
 	Returns:
-		Nothing
+		Groups
 
 	Example:
 		[
 			[garrisonArea1, garrisonArea2, garrisonArea3],
 			east,
 			14
-		] spawn DNV_fnc_spawnGarrison;
+		] call DNV_fnc_spawnGarrison;
 */
 params [
 	"_triggers",
@@ -36,6 +36,7 @@ params [
 	["_teleport", true],
 	["_spawnPos", nil]
 ];
+private _retGroups = [];
 {
 	private _trgPos = getPos _x;
 	if (isNil "_spawnPos") then {
@@ -46,6 +47,7 @@ params [
 		_side, 
 		_garrisonGroup
 	] call BIS_fnc_spawnGroup;
+	_retGroups pushBack _nuGroup;
 	[
 		_nuGroup, 
 		_trgPos, 
@@ -57,6 +59,7 @@ params [
 		true
 	] call lambs_wp_fnc_taskGarrison;
 	_nuGroup deleteGroupWhenEmpty true;
-	sleep 0.42857; // 3/7
 	deleteVehicle _x;
 } forEach _triggers;
+
+_retGroups;
