@@ -7,24 +7,29 @@ params [
 	"_groups"
 ];
 
-private _avgPlayerPos = [0,0,0];
-private _players = allPlayers;
-
+_players = allPlayers; // idk if race conditions happen but w/e
+private _centerPos = [0,0,0];
 {
-	_avgPlayerPos vectorAdd (getPosASL _x);
+	_centerPos = _centerPos vectorAdd (getPos _x);
 } forEach _players;
-_avgPlayerPos vectorMultiply (1 / (count _players));
 
-private _spawnPos =  (getMarkerPos _markerName) vectorDiff _avgPlayerPos; // relative position from player group
+//-- Divide sums by count of players
+_centerPos = _centerPos vectorMultiply (1 / count _players); // vectorDivide is not a command
+
+private _spawnPos =  (getMarkerPos _markerName) vectorDiff _centerPos; // relative position from player group
 _spawnPos = (vectorNormalized _spawnPos) vectorMultiply _dist; // scale to dist
+_spawnPos = _centerPos vectorAdd _spawnPos; // add to centerPos
 
 private _blockerGroups = [];
 {
-	_blockerGroups pushBack [
-		[_spawnPos # 0, _spawnPos # 1, 0],
+	_blockerGroups pushBack ([
+		_spawnPos,
 		_side,
 		_x
-	] call BIS_fnc_spawnGroup;
-	_x deleteGroupWhenEmpty true;
+	] call BIS_fnc_spawnGroup);
 } forEach _groups;
+{
+	_x deleteGroupWhenEmpty true;
+	_x addWaypoint [_centerPos, 25];
+} forEach _blockerGroups;
 _blockerGroups;
