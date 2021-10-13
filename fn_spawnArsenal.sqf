@@ -330,9 +330,9 @@ private _sharpshooters = [
 	"CUP_arifle_HK417_20",
 	
 	"optic_DMS",
-	"optic_DMS_weathered_F",
 	"CUP_optic_PSO_1",
 	"CUP_optic_Elcan_SpecterDR_RMR_black",
+	"CUP_optic_ACOG_TA01NSN_RMR_Black",
 	"CUP_bipod_Harris_1A2_L_BLK",
 	"CUP_SVD_camo_g",
 	"CUP_muzzle_snds_KZRZP_SVD",
@@ -546,13 +546,15 @@ private _baseItems = [
 	
 	"CUP_bipod_Harris_1A2_L_BLK",
 	
-	// the 6 1xs I like most
+	// the 8 1xs I like most
 	"optic_Aco",
+	"optic_yorris",
 	"CUP_optic_AC11704_Black",
 	"CUP_optic_CompM2_low",
 	"CUP_optic_MEPRO_openx_orange",
 	"CUP_optic_TrijiconRx01_kf_black",
 	"CUP_optic_ZeissZPoint",
+	"CUP_optic_Eotech553_Black",
 	
 	//dovetail
 	"CUP_optic_ekp_8_02",
@@ -664,10 +666,7 @@ private _hat = [
 private _hatAmmo = [
 	//"CUP_Javelin_M", 
 	"Titan_AT",
-	"Titan_AP",
-	
-	"B_Bergen_mcamo_F",
-	"B_Bergen_dgtl_F"
+	"Titan_AP" 
 ];
 
 private _airCrew = [
@@ -887,7 +886,7 @@ _baseItems pushBack headgear player;
 } forEach (assignedItems player);
 
 _baseItems append _tarkovuniforms;
-// _baseItems append _optic2x; // comment out for 1x only
+_baseItems append _optic2x; // comment out for 1x only
 // _machineGuns append _magFedMGs; // comment out for belt-feds only
 
 private _role = player getVariable ["tmf_assignGear_role",nil];
@@ -920,7 +919,7 @@ switch (true) do
 	{
 		{_baseItems append _x;} forEach [_rifles, _carbines, _rifleAmmo, _medics, _pistols];
 	};
-	case (_unitRole == "crew") :
+	case (_role == "crew") :
 	{
 		{_baseItems append _x;} forEach [_smgs, _carbines, _rifleAmmo, _binocs, _pistols]; // todo: tank crew stuff
 	};
@@ -956,7 +955,7 @@ switch (true) do
 	{
 		{_baseItems append _x;} forEach [_hatAmmo, _ammoCarriers, _rifles, _carbines, _rifleAmmo, _pistols];
 	};
-	case (_unitRole == "ceng") :
+	case (_role == "ceng") :
 	{
 		{_baseItems append _x;} forEach [_engineer, _ammoCarriers, _shotguns, _rifles, _carbines, _rifleAmmo, _pistols];
 	};
@@ -982,11 +981,11 @@ switch (true) do
 	};
 	case (_role == "mrtl") : // mortar lead
 	{
-		{_baseItems append _x;} forEach [_smgs, _carbines, _rifleAmmo, _pistols, _ammoCarriers, _mortar, ["ACRE_PRC148"]];
+		{_baseItems append _x;} forEach [_smgs, _binocs, _carbines, _rifleAmmo, _pistols, _ammoCarriers, _mortar, ["ACRE_PRC148"]];
 	};
 	case (_role == "mrta") : // mortar assistant
 	{
-		{_baseItems append _x;} forEach [_smgs, _carbines, _rifleAmmo, _pistols, _ammoCarriers, _mortar];
+		{_baseItems append _x;} forEach [_smgs, _binocs, _carbines, _rifleAmmo, _pistols, _ammoCarriers, _mortar];
 	};
 	default 
 	{
@@ -1014,4 +1013,3 @@ _action =
 ] call ace_interact_menu_fnc_createAction;
 
 ["CAManBase", 1, ["ACE_SelfActions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
-[player, currentWeapon player, currentMuzzle player] call ACE_SafeMode_fnc_lockSafety;
