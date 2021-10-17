@@ -64,7 +64,7 @@ private _rifles = [
 	
 	// 7.62x39
 	"CUP_arifle_AKM",
-	"CUP_arifle_AKM_railed"
+	"CUP_arifle_AKMN_railed"
 ];
 
 private _carbines = [
