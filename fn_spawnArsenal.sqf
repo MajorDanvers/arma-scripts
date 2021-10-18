@@ -587,7 +587,8 @@ private _binocs = [
 	"Binocular",
 	"Laserdesignator",
 	"Laserdesignator_03",
-	"Rangefinder"
+	"Rangefinder",
+    "ACE_Vector"
 ];
 
 private _leaders = [
@@ -660,13 +661,16 @@ private _matAmmo = [
 private _hat = [
 	//"CUP_launch_Javelin", // this any good?
 	"launch_I_Titan_short_F",
-	"launch_B_Titan_short_F"
+	"launch_B_Titan_short_F",
+    "launch_O_Vorona_brown_F",
+    "launch_O_Vorona_green_F"
 ];
 
 private _hatAmmo = [
 	//"CUP_Javelin_M", 
 	"Titan_AT",
-	"Titan_AP" 
+	"Titan_AP",
+    "Vorona_HEAT"
 ];
 
 private _airCrew = [
@@ -757,7 +761,8 @@ _specialForces append _shotguns;
 private _mortar = [
 	"B_Mortar_01_weapon_F",
 	"B_Mortar_01_support_F",
-	"ACE_artilleryTable"
+	"ACE_artilleryTable",
+    "ACE_microDAGR"
 ];
 
 private _ownedDLCs = getDLCs 1;
