@@ -21,7 +21,7 @@
 		Groups
 
 	Example:
-		[
+		_grps = [
 			[garrisonArea1, garrisonArea2, garrisonArea3],
 			east,
 			14
@@ -60,6 +60,7 @@ private _retGroups = [];
 	] call lambs_wp_fnc_taskGarrison;
 	_nuGroup deleteGroupWhenEmpty true;
 	deleteVehicle _x;
+    if (canSuspend) then {sleep 0.04;};
 } forEach _triggers;
 
 _retGroups;
