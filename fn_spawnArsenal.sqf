@@ -332,7 +332,7 @@ private _sharpshooters = [
 	"optic_DMS",
 	"CUP_optic_PSO_1",
 	"CUP_optic_Elcan_SpecterDR_RMR_black",
-	"CUP_optic_ACOG_TA01NSN_RMR_Black",
+	"CUP_optic_ACOG_TA01B_Black",
 	"CUP_bipod_Harris_1A2_L_BLK",
 	"CUP_SVD_camo_g",
 	"CUP_muzzle_snds_KZRZP_SVD",
