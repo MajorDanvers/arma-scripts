@@ -554,7 +554,7 @@ private _baseItems = [
 	"CUP_optic_MEPRO_openx_orange",
 	"CUP_optic_TrijiconRx01_kf_black",
 	"CUP_optic_ZeissZPoint",
-	"CUP_optic_Eotech553_Black",
+	"CUP_optic_HoloBlack",
 	
 	//dovetail
 	"CUP_optic_ekp_8_02",
