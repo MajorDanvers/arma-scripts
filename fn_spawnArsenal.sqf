@@ -897,104 +897,105 @@ _baseItems append _optic2x; // comment out for 1x only
 private _role = player getVariable ["tmf_assignGear_role",nil];
 private _leaderRole = ["tl", "sl"];
 
+#define addThese {_baseItems append _x;} forEach
 arsenal = "building" createVehicleLocal [0,0,0];
 switch (true) do 
 {
 	case (_role == "r") : // basic–so most will skip the rest of this giant switch
 	{
-		{_baseItems append _x;} forEach [_carbines, _rifles, _rifleAmmo, _pistols];
+		addThese [_carbines, _rifles, _rifleAmmo, _pistols];
 	};
 	case (_role == "lat") : // LAT
 	{
-		{_baseItems append _x;} forEach [_lat, _rifleAmmo, _rifles, _carbines, _pistols];
+		addThese [_lat, _rifleAmmo, _rifles, _carbines, _pistols];
 	};
 	case (_role == "ar") : //MG
 	{
-		{_baseItems append _x;} forEach [_machineGuns, _mgAmmo, _ammoCarriers, _pistols];
+		addThese [_machineGuns, _mgAmmo, _ammoCarriers, _pistols];
 	};
 	case (_role == "aar") : //MG ammobearer
 	{
-		{_baseItems append _x;} forEach [_carbines, _rifles, _ammoCarriers, _rifleAmmo, _mgAmmo, _pistols];
+		addThese [_carbines, _rifles, _ammoCarriers, _rifleAmmo, _mgAmmo, _pistols];
 	};
 	case (_role in _leaderRole) : // leaders
 	{
-		{_baseItems append _x;} forEach [_underslung, _rifleAmmo, _leaders, _pistols];
+		addThese [_underslung, _rifleAmmo, _leaders, _pistols];
 	};
 	case (_role == "cls") : // medics
 	{
-		{_baseItems append _x;} forEach [_rifles, _carbines, _rifleAmmo, _medics, _pistols];
+		addThese [_rifles, _carbines, _rifleAmmo, _medics, _pistols];
 	};
 	case (_role == "crew") :
 	{
-		{_baseItems append _x;} forEach [_smgs, _carbines, _rifleAmmo, _binocs, _pistols]; // todo: tank crew stuff
+		addThese [_smgs, _carbines, _rifleAmmo, _binocs, _pistols]; // todo: tank crew stuff
 	};
 	case (_role == "mat") : // MAT
 	{
-		{_baseItems append _x;} forEach [_mat, _matAmmo, _carbines, _rifles, _rifleAmmo, _ammoCarriers, _pistols];
+		addThese [_mat, _matAmmo, _carbines, _rifles, _rifleAmmo, _ammoCarriers, _pistols];
 	};
 	case (_role == "amat") : // MAT carrier
 	{
-		{_baseItems append _x;} forEach [_carbines, _rifles, _ammoCarriers, _rifleAmmo, _matAmmo, _pistols];
+		addThese [_carbines, _rifles, _ammoCarriers, _rifleAmmo, _matAmmo, _pistols];
 	};
 	case (_role == "sniper") : // Snipers
 	{
-		{_baseItems append _x;} forEach [_snipers, _pistols, _binocs];
+		addThese [_snipers, _pistols, _binocs];
 	};
 		case (_role == "spotter") : // Spotters and/or Sharpshooters
 	{
-		{_baseItems append _x;} forEach [_sharpshooters, _optic2x, _pistols, _binocs];
+		addThese [_sharpshooters, _optic2x, _pistols, _binocs];
 	};
 	case (_role == "aircrew") : // Pilots
 	{
-		{_baseItems append _x;} forEach [_smgs, _pistols, _aircrew, ["H_PilotHelmetFighter_B"]];
+		addThese [_smgs, _pistols, _aircrew, ["H_PilotHelmetFighter_B"]];
 	};
 	case (_role == "helocrew") : // Pilots
 	{
-		{_baseItems append _x;} forEach [_smgs, _carbines, _rifleAmmo, _pistols, _aircrew, ["H_PilotHelmetHeli_B"]];
+		addThese [_smgs, _carbines, _rifleAmmo, _pistols, _aircrew, ["H_PilotHelmetHeli_B"]];
 	};
 	case (_role == "hat") : // HAT
 	{
-		{_baseItems append _x;} forEach [_hat, _hatAmmo, _ammoCarriers, _rifles, _carbines, _rifleAmmo, _pistols];
+		addThese [_hat, _hatAmmo, _ammoCarriers, _rifles, _carbines, _rifleAmmo, _pistols];
 	};
 	case (_role == "ahat") : // HAT carrier
 	{
-		{_baseItems append _x;} forEach [_hatAmmo, _ammoCarriers, _rifles, _carbines, _rifleAmmo, _pistols];
+		addThese [_hatAmmo, _ammoCarriers, _rifles, _carbines, _rifleAmmo, _pistols];
 	};
 	case (_role == "ceng") :
 	{
-		{_baseItems append _x;} forEach [_engineer, _ammoCarriers, _shotguns, _rifles, _carbines, _rifleAmmo, _pistols];
+		addThese [_engineer, _ammoCarriers, _shotguns, _rifles, _carbines, _rifleAmmo, _pistols];
 	};
 	case (_role == "sfmed") : // SFMedic
 	{
-		{_baseItems append _x;} forEach [_lat, _manpad, _specialForces, _rifles, _carbines, _rifleAmmo, _pistols, _medics, _optic2x];
+		addThese [_lat, _manpad, _specialForces, _rifles, _carbines, _rifleAmmo, _pistols, _medics, _optic2x];
 	};
 	case (_role == "sfsl") : // SFLead
 	{
-		{_baseItems append _x;} forEach [_lat, _manpad, _specialForces, _underslung, _rifleAmmo, _pistols, _ammoCarriers, _optic2x, _leaders];
+		addThese [_lat, _manpad, _specialForces, _underslung, _rifleAmmo, _pistols, _ammoCarriers, _optic2x, _leaders];
 	};
 	case (_role == "sfdmr") : // SFMarksman
 	{
-		{_baseItems append _x;} forEach [_lat, _manpad, _specialForces, _sharpshooters, _pistols, _ammoCarriers, _leaders];
+		addThese [_lat, _manpad, _specialForces, _sharpshooters, _pistols, _ammoCarriers, _leaders];
 	};
 	case (_role == "sfar") : // SF MG
 	{
-		{_baseItems append _x;} forEach [_lat, _manpad, _specialForces, _machineGuns, _optic2x, _mgAmmo, _magFedMGs, _pistols, _ammoCarriers];
+		addThese [_lat, _manpad, _specialForces, _machineGuns, _optic2x, _mgAmmo, _magFedMGs, _pistols, _ammoCarriers];
 	};
 	case (_role == "sfmat") : // SF MAT
 	{
-		{_baseItems append _x;} forEach [_mat, _matAmmo, _specialForces, _rifles, _carbines, _rifleAmmo, _pistols, _ammoCarriers, _optic2x];
+		addThese [_mat, _matAmmo, _specialForces, _rifles, _carbines, _rifleAmmo, _pistols, _ammoCarriers, _optic2x];
 	};
 	case (_role == "mrtl") : // mortar lead
 	{
-		{_baseItems append _x;} forEach [_smgs, _binocs, _carbines, _rifleAmmo, _pistols, _ammoCarriers, _mortar, ["ACRE_PRC148"]];
+		addThese [_smgs, _binocs, _carbines, _rifleAmmo, _pistols, _ammoCarriers, _mortar, ["ACRE_PRC148"]];
 	};
 	case (_role == "mrta") : // mortar assistant
 	{
-		{_baseItems append _x;} forEach [_smgs, _binocs, _carbines, _rifleAmmo, _pistols, _ammoCarriers, _mortar];
+		addThese [_smgs, _binocs, _carbines, _rifleAmmo, _pistols, _ammoCarriers, _mortar];
 	};
 	default 
 	{
-		{_baseItems append _x;} forEach [_carbines, _rifles, _rifleAmmo, _pistols];
+		addThese [_carbines, _rifles, _rifleAmmo, _pistols];
 	};
 };
 
