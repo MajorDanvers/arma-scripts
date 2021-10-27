@@ -7,4 +7,4 @@ params [
 	"_magnitude"
 ];
 private _mathBflipped = (_bearing + 90) % 360; // rotate 90º counterclockwise
-[sin _mathBflipped, -1 * cos _mathBflipped] vectorMultiply _magnitude; // reflect over y-axis then vector multiply
+[-1 * cos _mathBflipped, sin _mathBflipped, 0] vectorMultiply _magnitude; // reflect over y-axis then vector multiply
