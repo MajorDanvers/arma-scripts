@@ -1,4 +1,7 @@
-params ["_unit"];
+params [
+	"_unit",
+	["_insig", ""]
+];
 [
 	{
 		if (uniform _this in ['U_B_CombatUniform_mcam_tshirt_W', 'WU_B_T_Soldier_AR_F', 'WU_B_GEN_Commander_F']) then {
@@ -15,7 +18,7 @@ params ["_unit"];
 [
 	{
 		[_this, ""] call BIS_fnc_setUnitInsignia;
-		[_this, "CatsInc"] call BIS_fnc_setUnitInsignia;
+		[_this, _insig] call BIS_fnc_setUnitInsignia;
 	},
 	_unit,
 	1
