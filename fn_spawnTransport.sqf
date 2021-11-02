@@ -14,6 +14,7 @@
 			Config - CfgGroups entry
 		2: String – Vehicle type class name
 		3: Position - where the vehicle spawns. n.b. it will spawn facing north
+		4: Number - Direction // TODO
 		4: Position - where it will unload.
 		5: Position (Optional) - where the group will move to after unloading.
 		6: String (Optional) (WAYPOINT TYPE) - can use "UNLOAD" here to keep
