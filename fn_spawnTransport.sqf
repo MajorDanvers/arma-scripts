@@ -8,10 +8,8 @@
 
 	Parameter(s):
 		0: SIDE of units
-		1: Units to spawn - One of:
-			Array - list of character types
-			Number - amount of characters to spawn
-			Config - CfgGroups entry
+		1: Side or Group, crew
+		2: CargoGroup
 		2: String – Vehicle type class name
 		3: Position - where the vehicle spawns. n.b. it will spawn facing north
 		4: Number - Direction // TODO
@@ -40,25 +38,15 @@
 */
 params [
 	"_side",
-	"_group",
+	"_cargoGroup",
 	"_vehicle",
 	"_startingPos",
+	"_direction",
 	"_unloadPos",
+	["_sideOrGroup", nil],
 	["_targetPos", _this # 4],
 	["_unloadType", "GETOUT"]  // for IFVs: UNLOAD
 ];
-private _veh = _vehicle createVehicle _startingPos;
-private _grp = [_startingPos, _side, _group] call BIS_fnc_spawnGroup;
-{_x moveInAny _veh} forEach (units _grp);
-private _wp = _grp addWaypoint [_unloadPos, 1];
-_wp setWaypointType _unloadType;
-_wp setWaypointBehaviour "CARELESS";
-if (_unloadType == "GETOUT") then {
-	// attempt to prevent get-in get-out FSM loops
-	_wp setWaypointStatements ["true", "this leaveVehicle assignedVehicle (leader this);"];
-};
-
-_wp = _grp addWaypoint [_targetPos, 1];
-_wp setWaypointBehaviour "AWARE";
-_wp setWaypointStatements ["true", "[this, 500, 29] spawn lambs_wp_fnc_taskRush;"];
-[_veh, _grp];
+if isNil {_sideOrGroup} then {_sideOrGroup = _side};
+private _crewed = [_startingPos, _direction, _vehicle, _sideOrGroup] call BIS_fnc_spawnVehicle;
+private _cargo = [_startingPos vectorAdd [10, 0, 0], _side, _cargoGroup] call BIS_fnc_spawnGroup;
