@@ -2,7 +2,7 @@
 	Author: majDanvers
 
 	Description:
-		Spawns a transport (or IFV) full of a given group that will unload at a
+		Spawns an IFV full of a given group that will unload at a
 		given position, move to a second, and then rush opponents
 		using LAMBS task.
 
@@ -16,9 +16,8 @@
 		6: Crew group
 		7: Position (Optional) - where the group will move to after unloading.
 		8: Vehicle variant
-		9: Optional, default starting position - Where the transport will return to
 	Returns:
-		Array – [Vehicle, Group]
+		Array – [Vehicle, Crew, Cargo]
 
 	Example:
 		[
@@ -42,36 +41,28 @@ params [
 	"_startingPos",
 	"_direction",
 	"_unloadPos",
-	["_crewGroup", nil],
+	"_crewGroup",
 	["_targetPos", _this # 5],
-	["_variant", nil],
-	["_returnPos", _this # 3]
+	["_variant", nil]
 ];
 
-if isNil {_crewGroup} then {_crewGroup = _side} else {
-	_crewGroup = [
-		_startingPos vectorAdd [10, 0, 0],
-		_side,
-		_crewGroup
-	] call BIS_fnc_spawnGroup;
-};
-_spawnedVehicle = [
-	_startingPos,
-	_direction,
-	_vehicle,
+_crewGroup = [
+	_startingPos vectorAdd [10, 0, 0],
+	_side,
 	_crewGroup
-] call BIS_fnc_spawnVehicle;
+] call BIS_fnc_spawnGroup;
+_spawnedVehicle = createVehicle [_vehicle, _startingPos];
+_spawnedVehicle setDir _direction;
+{_x moveInAny _spawnedVehicle} forEach units _crewGroup;
 
 if ! isNil {_variant} then {
 	[
-		_spawnedVehicle # 0,
+		_spawnedVehicle,
 		_variant
 	] call BIS_fnc_initVehicle;
 };
 
-(_spawnedVehicle # 2) deleteGroupWhenEmpty true;
-
-// {[_x, 'PBKAC_LOADOUT', 'pilot'] call tmf_assigngear_fnc_assignGear} forEach (units (_spawnedVehicle # 2));
+_crewGroup deleteGroupWhenEmpty true;
 
 // cargo time
 _spawnedCargo = [
@@ -81,14 +72,12 @@ _spawnedCargo = [
 ] call BIS_fnc_spawnGroup;
 _spawnedCargo deleteGroupWhenEmpty true;
 
-// [(units _spawnedCargo), pbkacRoles, 'PBKAC_LOADOUT'] call DNV_fnc_customGear;
-
 {
-	_x moveInCargo (_spawnedVehicle # 0);
+	_x moveInAny _spawnedVehicle;
 } forEach (units _spawnedCargo);
 
 // moving
-_unloadWP = (_spawnedVehicle # 2) addWaypoint [
+_unloadWP = _crewGroup addWaypoint [
 	_unloadPos,
 	-1
 ];
@@ -96,13 +85,13 @@ _unloadWP = (_spawnedVehicle # 2) addWaypoint [
 _unloadWP setWaypointType "TR UNLOAD";
 _unloadWP setWaypointBehaviour "CARELESS";
 
-_unloadWP = (_spawnedVehicle # 2) addWaypoint [
-	_returnPos,
+_unloadWP = _crewGroup addWaypoint [
+	_targetPos,
 	-1
 ];
 _unloadWP setWaypointStatements [
 	"true",
-	"deleteVehicle vehicle this; {deleteVehicle _x} forEach (units (group this));"
+	"[this, 1000] spawn lambs_wp_fnc_taskRush;"
 ];
 _unloadWP setWaypointBehaviour "SAFE";
 
@@ -121,3 +110,5 @@ _unloadWP setWaypointBehaviour "SAFE";
 	[_spawnedCargo, _targetPos],
 	5
 ] call CBA_fnc_waitAndExecute;
+
+[_spawnedVehicle, _crewGroup, _spawnedCargo];
