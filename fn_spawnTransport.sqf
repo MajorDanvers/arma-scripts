@@ -75,7 +75,7 @@ _spawnedCargo = [
 _spawnedCargo deleteGroupWhenEmpty true;
 
 {
-	_x moveInCargo _spawnedVehicle;
+	_x moveInAny _spawnedVehicle;
 } forEach (units _spawnedCargo);
 
 // moving
