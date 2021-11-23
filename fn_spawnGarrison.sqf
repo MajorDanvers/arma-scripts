@@ -17,6 +17,7 @@
 		4: (Optional, default 100) Number – Range of tracking
 		5: (Optional, default true) Boolean - Teleport to positions
 		6: Position – Position to spawn group
+		7: Bool - Whether to spawn a patrol
 	Returns:
 		Groups
 
@@ -34,7 +35,8 @@ params [
 	["_freeType", -1],
 	["_range", 100],
 	["_teleport", true],
-	["_spawnPos", nil]
+	["_spawnPos", nil],
+	["_patrol", false]
 ];
 private _retGroups = [];
 {
@@ -56,7 +58,7 @@ private _retGroups = [];
 		_teleport, 
 		false, 
 		_freeType, 
-		true
+		_patrol
 	] call lambs_wp_fnc_taskGarrison;
 	_nuGroup deleteGroupWhenEmpty true;
 	deleteVehicle _x;
