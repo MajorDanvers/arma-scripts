@@ -5,8 +5,8 @@ params [
 [
     {
         if (uniform _this in [
-            'U_B_Combatuniform_mcam_tshirt_W',
-            'WU_B_T_Soldier_AR_F',
+            'U_B_CombatUniform_mcam_tshirt_W',
+            "WU_B_T_Soldier_AR_F",
             'WU_B_GEN_commander_F'
         ]) then {
             private _face = selectRandom [
@@ -29,9 +29,9 @@ params [
 ] call CBA_fnc_waitandexecute;
 [
     {
-        [_this, ""] call BIS_fnc_setUnitinsignia;
-        [_this, _insig] call BIS_fnc_setUnitinsignia;
+        [_this # 0, ""] call BIS_fnc_setUnitInsignia;
+        [_this # 0, _this # 1] call BIS_fnc_setUnitInsignia;
     },
-    _unit,
+    [_unit, _insig],
     1
 ] call CBA_fnc_waitandexecute;
