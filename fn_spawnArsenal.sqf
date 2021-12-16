@@ -47,6 +47,7 @@ private _rifles = [
 	"CUP_arifle_HK416_Black",
 	"CUP_Famas_F1_Rail",
 	"CUP_arifle_M16A4_Grip",
+    "CUP_arifle_AK101_railed",
 
 	// 6.5
 	/*
@@ -64,6 +65,8 @@ private _rifles = [
 	
 	// 7.62x39
 	"CUP_arifle_AKM",
+    "CUP_arifle_AK103_railed",
+    "CUP_arifle_Sa58V",
 	"CUP_arifle_AKMN_railed"
 ];
 
@@ -74,14 +77,18 @@ private _carbines = [
 	"CUP_arifle_XM8_Compact_Rail",
 	"CUP_arifle_ACRC_blk_556",
 	"CUP_arifle_M4A1_SOMMOD_black",
+    "CUP_arifle_HK416_CQC_Black",
+    "CUP_arifle_mk18_black",
 	
 	// 5.45
 	"CUP_arifle_Fort224_Grippod",
 	"CUP_arifle_AKS74U",
 	"CUP_arifle_AKS74U_top_rail",
+    "CUP_arifle_AK105_railed",
 	
 	// 7.62x39
-	"CUP_arifle_OTS14_GROZA_762"
+	"CUP_arifle_OTS14_GROZA_762",
+    "CUP_arifle_Sa58_Carbine_RIS_AFG"
 	
 	// 6.5
 	/*
@@ -96,10 +103,13 @@ private _underslung = [
 	"CUP_arifle_ACRC_EGLM_blk_556",
 	"CUP_arifle_ACR_EGLM_blk_556",
 	"CUP_arifle_M16A4_GL",
+    "CUP_arifle_mk18_m203_black",
 	"CUP_arifle_M4A1_GL_carryhandle",
 	"CUP_arifle_G36A3_AG36",
 	"CUP_arifle_XM8_Carbine_GL",
 	"CUP_arifle_HK416_AGL_Black",
+    "CUP_arifle_AK101_GL",
+	"CUP_arifle_AK101_GL_railed",
 	
 	// 5.45
 	"CUP_arifle_AK74M_GL",
@@ -109,6 +119,7 @@ private _underslung = [
 	"CUP_arifle_AKM_GL",
 	"CUP_arifle_AKM_GL_top_rail",
 	"CUP_arifle_OTS14_GROZA_762_GL",
+    "CUP_arifle_Sa58RIS2_gl",
 	
 	// 7.62x51
 	"CUP_arifle_DSA_SA58_OSW_M203",
@@ -140,12 +151,16 @@ private _rifleAmmo = [
 	// 5.56
 	// standard
 	"CUP_30Rnd_556x45_Emag",
+    "CUP_30Rnd_556x45_PMAG_QP",
 	"CUP_30Rnd_556x45_XM8",
 	"CUP_25Rnd_556x45_Famas",
+    "CUP_30Rnd_556x45_AK",
 	// tracer
 	"CUP_30Rnd_556x45_Emag_Tracer_Yellow",
 	"CUP_30Rnd_TE1_Yellow_Tracer_556x45_XM8",
 	"CUP_25Rnd_556x45_Famas_Tracer_Yellow",
+    "CUP_30Rnd_TE1_Yellow_Tracer_556x45_AK",
+    "CUP_30Rnd_556x45_PMAG_QP_Tracer_Yellow",
 	
 	// 5.45
 	// standard
@@ -164,8 +179,12 @@ private _rifleAmmo = [
 	// 7.62x39
 	// standard
 	"CUP_30Rnd_762x39_AK47_bakelite_M",
+    "CUP_30Rnd_762x39_AK47_M",
+	"CUP_30Rnd_Sa58_M",
 	// tracer
 	"CUP_30Rnd_TE1_Green_Tracer_762x39_AK47_bakelite_M",
+    "CUP_30Rnd_TE1_Green_Tracer_762x39_AK47_M",
+    "CUP_30Rnd_Sa58_M_TracerG",
 	
 	/*
 	// 6.5x39
@@ -195,7 +214,6 @@ private _pistols = [
 	"CUP_hgun_M17_Black",
 	"CUP_hgun_Makarov",
 	"CUP_hgun_Mk23",
-	"CUP_hgun_TaurusTracker455",
 	"CUP_hgun_Deagle",
 	"CUP_hgun_M9A1",
 	"CUP_hgun_Colt1911",
@@ -214,7 +232,9 @@ private _pistols = [
 	"CUP_17Rnd_9x19_glock17",
 	"CUP_8Rnd_762x25_TT",
 	
+	"cup_acc_mk23_lam_f",
 	"CUP_acc_CZ_M3X",
+	"cup_acc_glock17_flashlight",
 	
 	"greenmag_ammo_9x18_basic_30Rnd",
 	"greenmag_ammo_9x19_basic_30Rnd",
@@ -226,9 +246,10 @@ private _pistols = [
 private _machineGuns = [
 	//7.62x54
 	"CUP_lmg_Pecheneg_top_rail_B50_vfg",
+    "CUP_lmg_Pecheneg_B50_vfg",
 	
 	//5.56
-	"CUP_lmg_minimi_railed",
+	"CUP_lmg_L110A1",
 
 	//7.62x51
 	"CUP_lmg_M60E4",
@@ -236,7 +257,16 @@ private _machineGuns = [
 	
 	//mods
 	"CUP_muzzle_snds_KZRZP_PK",
-	"CUP_muzzle_mfsup_flashhider_pk_black"
+	"CUP_muzzle_mfsup_flashhider_pk_black",
+    
+    "CUP_H_RUS_Altyn_Goggles",
+	"CUP_H_RUS_Altyn_Shield_Up",
+	"CUP_H_RUS_Altyn_Shield_Down",
+	"CUP_H_RUS_Altyn_Goggles_khaki",
+	"CUP_H_RUS_Altyn_Shield_Up_khaki",
+	"CUP_H_RUS_Altyn_Shield_Down_khaki",
+	"CUP_H_RUS_Altyn_Goggles_black",
+	"CUP_H_RUS_Altyn_Shield_Down_black"
 ];
 
 private _magFedMGs = [
@@ -246,6 +276,9 @@ private _magFedMGs = [
 	
 	//7.62x39
 	"CUP_arifle_RPK74",
+    "CUP_arifle_RPK74_top_rail",
+	"CUP_arifle_Sa58_Klec",
+	"CUP_arifle_Sa58_Klec_ris",
 	
 	//5.56
 	"CUP_arifle_L86A2",
@@ -326,12 +359,16 @@ private _snipers = [
 
 private _sharpshooters = [
 	"CUP_srifle_SVD",
+    "CUP_srifle_SVD_top_rail",
 	"CUP_srifle_M14_DMR",
 	"CUP_arifle_HK417_20",
 	
 	"optic_DMS",
+    "optic_DMS_weathered_F",
 	"CUP_optic_PSO_1",
 	"CUP_optic_Elcan_SpecterDR_RMR_black",
+    "cup_optic_acog",
+	"cup_optic_acog_ta01nsn_rmr_black",
 	"CUP_optic_ACOG_TA01B_Black",
 	"CUP_bipod_Harris_1A2_L_BLK",
 	"CUP_SVD_camo_g",
@@ -346,7 +383,7 @@ private _sharpshooters = [
 	"greenmag_ammo_762x54_basic_60Rnd",
 	"greenmag_ammo_762x51_basic_60Rnd",
 	
-	"ACE_ATragMX"
+	// "ACE_ATragMX" if we ever turn on adv. ballistics (we won't)
 ];
 
 private _smgs = [
@@ -356,13 +393,22 @@ private _smgs = [
 	"CUP_smg_vityaz_vfg_top_rail",
 	"CUP_smg_bizon",
 	"CUP_smg_SA61",
+    "CUP_smg_MP7",
 	
+    "CUP_40Rnd_46x30_MP7",
 	"CUP_30Rnd_9x39_SP5_VIKHR_M",
 	"CUP_30Rnd_45ACP_MAC10_M",
 	"CUP_30Rnd_9x19_MP5",
 	"CUP_30Rnd_9x19_Vityaz",
 	"CUP_64Rnd_9x19_Bizon_M",
 	"CUP_20Rnd_B_765x17_Ball_M",
+    
+    "CUP_muzzle_snds_mp7",
+	"CUP_muzzle_snds_mp5",
+	"CUP_muzzle_snds_sa61",
+	"CUP_muzzle_mfsup_suppressor_mac10",
+	"CUP_muzzle_Bizon",
+	"cup_muzzle_snds_sr3m",	
 	
 	"greenmag_ammo_46x30_basic_60Rnd",
 	"greenmag_ammo_765x17_basic_60Rnd",
@@ -397,6 +443,8 @@ private _baseItems = [
 	"U_B_CombatUniform_mcam_wdl_f",
 	"U_B_CombatUniform_tshirt_mcam_wdL_f",
 	"CUP_U_O_RUS_Ratnik_Winter",
+    "CUP_U_I_GUE_Anorak_01",
+	"CUP_U_I_GUE_Flecktarn3",
 	
 	"WU_B_GEN_Soldier_F",
 	"WU_B_T_Soldier_F",
@@ -426,6 +474,7 @@ private _baseItems = [
 	"B_Kitbag_tan",
 	"B_Kitbag_sgg",
 	"B_Kitbag_rgr",
+    "B_Kitbag_cbr",
 	"CUP_B_USPack_Black",
 	"CUP_B_GER_Pack_Flecktarn",
 	"CUP_B_GER_Pack_Tropentarn",
@@ -450,7 +499,12 @@ private _baseItems = [
 	"H_Cap_blk",
 	"H_Cap_oli",
 	"H_Cap_tan",
+    "CUP_H_PMC_Cap_Back_Grey",
+	"CUP_H_PMC_Cap_EP_Grey",
+    "CUP_H_PMC_Cap_Back_Tan",
+	"CUP_H_PMC_Cap_EP_Tan",
 	
+    "H_HelmetB_Enh_tna_F",
 	"H_HelmetSpecB",
 	"H_HelmetSpecB_blk",
 	"H_HelmetSpecB_paint2",
@@ -461,6 +515,8 @@ private _baseItems = [
 	
 	"CUP_H_RUS_K6_3_black",
 	"CUP_H_RUS_K6_3_Goggles_black",
+    "CUP_H_RUS_Bandana_GSSh_Headphones",
+	"CUP_H_RUS_Bandana_HS",
 	
 	"H_Watchcap_blk",
 	"H_Watchcap_khk",
@@ -468,6 +524,7 @@ private _baseItems = [
 	"H_Watchcap_camo",
 	
 	"H_Hat_camo", // shoot on sight
+    "NVGoggles_OPFOR",
 	
 	// facewear
 	"G_Balaclava_blk",
@@ -477,6 +534,7 @@ private _baseItems = [
 	"G_Bandanna_blk",
 	"G_Tactical_Clear",
 	"CUP_G_ESS_BLK",
+    "CUP_G_ESS_BLK_Scarf_Face_Blk",
 	"CUP_G_ESS_BLK_Facewrap_Black",
 	"CUP_G_ESS_BLK_Scarf_Grn",
 	"CUP_G_ESS_BLK_Dark",
@@ -521,6 +579,7 @@ private _baseItems = [
 	"FirstAidKit",
 	"ACE_MapTools",
 	"ACE_RangeCard",
+    "ACE_Flashlight_XL50",
 	"HandGrenade",
 	"CUP_HandGrenade_RGD5",
 	"ACE_M84",
@@ -529,37 +588,46 @@ private _baseItems = [
 	"SmokeShellGreen",
 	"SmokeShellPurple",
 	"SmokeShellRed",
+    
+    // night?
 	"ACE_Chemlight_IR",
 	"ACE_Chemlight_HiWhite",
 	
 	// mods
-	/* borked
-	"CUP_acc_ANPEQ_15_Black",
-	"CUP_acc_ANPEQ_15_Black_Top",
-	"CUP_acc_ANPEQ_15_Flashlight_Black_L",
-	"CUP_acc_ANPEQ_15_Top_Flashlight_Black_L",
-	"CUP_acc_LLM_black",
-	*/
-	"CUP_acc_ANPEQ_2_Flashlight_Black_L",
-	"CUP_acc_Flashlight",
-
+	"cup_acc_flashlight",
+	"CUP_acc_anpeq_15",
+	"CUP_acc_anpeq_15_tan_Top",
+	"CUP_acc_anpeq_15_Flashlight_tan_L",
+	"CUP_acc_anpeq_15_Top_Flashlight_tan_L",
+	"CUP_acc_anpeq_15_Black",
+	"CUP_acc_anpeq_15_Black_Top",
+	"CUP_acc_anpeq_15_Flashlight_Black_L",
+	"CUP_acc_anpeq_15_Top_Flashlight_Black_L",
+	"CUP_acc_llm_black",
 	
 	"CUP_bipod_Harris_1A2_L_BLK",
 	
-	// the 8 1xs I like most
-	"optic_Aco",
+	//Vanilla
 	"optic_yorris",
-	"CUP_optic_AC11704_Black",
-	"CUP_optic_CompM2_low",
+	"optic_aco",
+	"optic_holosight_blk_f",
+
+	//CUP Reflex Sights
+	"cup_optic_ac11704_black",
+	"cup_optic_mrad",
+	"cup_optic_vortexrazor_uh1_black",
+	"cup_optic_eotech553_black",
+	"cup_optic_compm4",
+	"cup_optic_okp_7_rail",
 	"CUP_optic_MEPRO_openx_orange",
-	"CUP_optic_TrijiconRx01_kf_black",
+	"CUP_optic_TrijiconRx01_black",
 	"CUP_optic_ZeissZPoint",
-	"CUP_optic_HoloBlack",
-	
-	//dovetail
+
+	//Dovetail (Ak Sights)
 	"CUP_optic_ekp_8_02",
 	"CUP_optic_Kobra",
 	"CUP_optic_1p63",
+	"CUP_optic_okp_7",
 	
 	"CUP_muzzle_snds_SCAR_H",
 	
@@ -580,29 +648,48 @@ private _optic2x = [
 	"optic_MRCO",
 	"optic_Hamr",
 
-	"CUP_optic_PSO_1_AK_open"
+	"cup_optic_aimm_microt1_blk",
+	"cup_optic_aimm_compm2_blk",
+	"cup_optic_aimm_compm4_blk",
+	"cup_optic_aimm_zddot_blk",
+	"cup_optic_g33_hws_blk",
+
+	"CUP_optic_pechenegscope"
 ];
 
 private _binocs = [
 	"Binocular",
 	"Laserdesignator",
+    "Laserdesignator_01_khk_F",
 	"Laserdesignator_03",
 	"Rangefinder",
-    "ACE_Vector"
+    "ACE_Vector",
+    "Laserbatteries"
 ];
 
 private _leaders = [
 	"hgun_Pistol_heavy_02_F",
 	"6Rnd_45ACP_Cylinder",
+    "CUP_hgun_TaurusTracker455_gold",
+	"CUP_hgun_TaurusTracker455",
 	
 	"CUP_V_CZ_NPP2006_co_black",
 	"CUP_V_CZ_NPP2006_co_vz95",
+    
+    "6Rnd_45ACP_Cylinder",
+    "CUP_6Rnd_45ACP_M",
+    
+    "optic_mrd_black",
+	"muzzle_snds_l",
+	"cup_muzzle_snds_mk23",
 	
 	"H_Beret_blk",
 	"CUP_H_Beret_HIL",
 	"CUP_H_SLA_BeretRed",
 	"CUP_H_ChDKZ_Beret",
 	"ACRE_PRC148",
+    "ACRE_PRC152",
+	"ACRE_PRC117F",
 	
 	"ACE_SpraypaintBlue"
 ];
@@ -624,10 +711,16 @@ private _ammoCarriers = [
 private _lat = [
 	"CUP_launch_M136",
 	"CUP_launch_RPG26",
+    "CUP_launch_M72A6",
+    
+    "CUP_launch_M136_Loaded",
 	"CUP_launch_M72A6_Loaded",
+	"CUP_M72A6_M",
+	"CUP_launch_RPG26_Loaded",
 	
 	"CUP_launch_RPG7V",
-	"CUP_PG7VL_M"
+	"CUP_PG7VL_M",
+    "CUP_optic_PGO7V3"
 ];
 
 private _manpad = [
@@ -642,9 +735,9 @@ private _manpad = [
 ];
 
 private _mat = [
-	"launch_MRAWS_green_rail_F",
-	"launch_MRAWS_olive_rail_F",
-	"launch_MRAWS_sand_rail_F",
+	"launch_MRAWS_green_F",
+    "launch_MRAWS_olive_F",
+    "launch_MRAWS_sand_F",
 	"CUP_launch_Mk153Mod0",
 	"CUP_launch_Mk153Mod0_blk",
 	"CUP_optic_SMAW_Scope"
@@ -670,7 +763,10 @@ private _hatAmmo = [
 	//"CUP_Javelin_M", 
 	"Titan_AT",
 	"Titan_AP",
-    "Vorona_HEAT"
+    "Vorona_HEAT",
+    "B_Bergen_mcamo_F",
+    "B_Bergen_tna_F",
+    "B_Bergen_hex_F"
 ];
 
 private _airCrew = [
@@ -739,6 +835,7 @@ private _specialForces = [
 	"ACE_M14",
 	"DemoCharge_Remote_Mag",
 	"ACRE_PRC148",
+    "O_NVGoggles_grn_F",
 	
 	"CUP_V_B_Ciras_Black",
 	"CUP_V_B_Ciras_Black2",
@@ -746,12 +843,26 @@ private _specialForces = [
 	"CUP_V_B_Ciras_Khaki2",
 	"CUP_V_B_Ciras_Olive",
 	"CUP_V_B_Ciras_Olive2",
+    
+    "CUP_U_O_RUS_Gorka_Green_gloves_kneepads",
 	
 	"Mechanism",
+    "G2_Gunslinger",
+	"Paratus",
 	
+	//Weapons
+	"CUP_arifle_AK107_railed",
+	"CUP_arifle_AK108_railed",
+	"CUP_arifle_AK109_railed",
 	"CUP_arifle_AS_VAL_VFG_top_rail",
 	"CUP_smg_MP5SD6",
-	
+	"CUP_sgun_AA12",
+	"CUP_20Rnd_B_AA12_Buck_00",
+	"CUP_20Rnd_B_AA12_Slug",
+	"CUP_100Rnd_TE4_LRT4_Yellow_Tracer_762x51_Belt_M",
+
+	//Attachments
+	"cup_acc_flashlight_mp5sd"
 	"CUP_20Rnd_9x39_SP5_VSS_M"
 ];
 _specialForces append _binocs;
@@ -971,7 +1082,7 @@ switch (true) do
 	};
 	case (_role == "sfsl") : // SFLead
 	{
-		addThese [_lat, _manpad, _specialForces, _underslung, _rifleAmmo, _pistols, _ammoCarriers, _optic2x, _leaders];
+		addThese [["CUP_lmg_m249_para_gl", "CUP_arifle_AK107_GL_railed", "CUP_arifle_AK108_GL_railed", "CUP_arifle_AK109_GL_railed"], _lat, _manpad, _specialForces, _underslung, _rifleAmmo, _pistols, _ammoCarriers, _optic2x, _leaders];
 	};
 	case (_role == "sfdmr") : // SFMarksman
 	{
