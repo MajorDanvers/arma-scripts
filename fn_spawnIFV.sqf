@@ -91,7 +91,7 @@ _unloadWP = _crewGroup addWaypoint [
 ];
 _unloadWP setWaypointStatements [
 	"true",
-	"[this, 1000] spawn lambs_wp_fnc_taskRush;"
+	"[this] spawn lambs_wp_fnc_taskReset; [this, 1000] spawn lambs_wp_fnc_taskRush;"
 ];
 _unloadWP setWaypointBehaviour "SAFE";
 
@@ -104,7 +104,7 @@ _unloadWP setWaypointBehaviour "SAFE";
 		];
 		_moveWP setWaypointStatements [
 			"true",
-			"[this, 1000] spawn lambs_wp_fnc_taskRush;"
+			"[this] spawn lambs_wp_fnc_taskReset; [this, 1000] spawn lambs_wp_fnc_taskRush;"
 		];
 	},
 	[_spawnedCargo, _targetPos],
