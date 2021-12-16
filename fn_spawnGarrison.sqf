@@ -6,7 +6,7 @@
 		using BIS_fnc_spawnGroup & LAMBS Garrison waypoint.
 
 	Parameter(s):
-		0: ARRAY of trigger objects
+		0: Trigger object
 		1: Side – Group's side
 		2: One of:
 			Array - list of character types
@@ -29,7 +29,7 @@
 		] call DNV_fnc_spawnGarrison;
 */
 params [
-	"_triggers",
+	"_trigger",
 	"_side",  
 	"_garrisonGroup",
 	["_freeType", -1],
@@ -38,31 +38,29 @@ params [
 	["_spawnPos", nil],
 	["_patrol", false]
 ];
-private _retGroups = [];
-{
-	private _trgPos = getPos _x;
-	if (isNil "_spawnPos") then {
-		_spawnPos = getPos _x;
-	};
-	private _nuGroup = [	
-		_spawnPos, 
-		_side, 
-		_garrisonGroup
-	] call BIS_fnc_spawnGroup;
-	_retGroups pushBack _nuGroup;
-	[
-		_nuGroup, 
-		_trgPos, 
-		_range,
-		triggerArea _x, 
-		_teleport, 
-		false, 
-		_freeType, 
-		_patrol
-	] call lambs_wp_fnc_taskGarrison;
-	_nuGroup deleteGroupWhenEmpty true;
-	deleteVehicle _x;
-    if (canSuspend) then {sleep 0.04;};
-} forEach _triggers;
 
-_retGroups;
+private _retGroup = grpNull;
+private _trgPos = getPos _trigger;
+
+if (isNil "_spawnPos") then {
+	_spawnPos = getPos _trigger;
+};
+private _retGroup = [	
+	_spawnPos, 
+	_side, 
+	_garrisonGroup
+] call BIS_fnc_spawnGroup;
+[
+	_retGroup, 
+	_trgPos, 
+	_range,
+	triggerArea _trigger, 
+	_teleport, 
+	false, 
+	_freeType, 
+	_patrol
+] call lambs_wp_fnc_taskGarrison;
+_retGroup deleteGroupWhenEmpty true;
+deleteVehicle _trigger;
+
+_retGroup;
