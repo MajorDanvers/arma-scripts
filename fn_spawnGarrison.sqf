@@ -12,12 +12,12 @@
 			Array - list of character types
 			Number - amount of characters to spawn
 			Config - CfgGroups entry
-		3: (Optional, default -1) Number – Exit condition(s) that breaks a 
-				Unit free (-2 Random, -1 All, 0 Hit, 1 Fired, 2 FiredNear)
+		3: (Optional, default 4) Number – Exit condition(s) that breaks a 
+				Unit free (-2 Random, -1 All, 0 None, 1 Hit, 2 Fired, 3 FiredNear, 4 Suppressed)
 		4: (Optional, default 100) Number – Range of tracking
 		5: (Optional, default true) Boolean - Teleport to positions
-		6: Position – Position to spawn group
-		7: Bool - Whether to spawn a patrol
+		6: (Optional, default trigger center) Position – Position to spawn group
+		7: (Optional, default False) Bool - Whether to spawn a patrol
 	Returns:
 		Groups
 
@@ -32,7 +32,7 @@ params [
 	"_trigger",
 	"_side",  
 	"_garrisonGroup",
-	["_freeType", -1],
+	["_freeType", 4],
 	["_range", 100],
 	["_teleport", true],
 	["_spawnPos", nil],
