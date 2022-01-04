@@ -42,7 +42,7 @@ params [
 	"_direction",
 	"_unloadPos",
 	"_crewGroup",
-	["_targetPos", _this # 5],
+	["_targetPos", nil],
 	["_variant", nil]
 ];
 
@@ -60,6 +60,15 @@ if ! isNil {_variant} then {
 		_spawnedVehicle,
 		_variant
 	] call BIS_fnc_initVehicle;
+};
+
+clearItemCargoGlobal _spawnedVehicle;
+clearMagazineCargoGlobal _spawnedVehicle;
+clearWeaponCargoGlobal _spawnedVehicle;
+clearBackpackCargoGlobal _spawnedVehicle;
+
+if isNil {_targetPos} then {
+	_targetPos = _this # 5;
 };
 
 _crewGroup deleteGroupWhenEmpty true;
@@ -100,7 +109,7 @@ _unloadWP setWaypointBehaviour "SAFE";
 	{
 		_moveWP = (_this # 0) addWaypoint [
 			_this # 1,
-			0.5
+			-1
 		];
 		_moveWP setWaypointStatements [
 			"true",

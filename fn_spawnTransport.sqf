@@ -45,7 +45,8 @@ params [
 	"_crewGroup",
 	["_targetPos", _this # 5],
 	["_variant", nil],
-	["_returnPos", _this # 3]
+	["_returnPos", _this # 3],
+	["_rushRadius", 1000]
 ];
 
 _crewGroup = [
@@ -63,6 +64,11 @@ if ! isNil {_variant} then {
 		_variant
 	] call BIS_fnc_initVehicle;
 };
+
+clearItemCargoGlobal _spawnedVehicle;
+clearMagazineCargoGlobal _spawnedVehicle;
+clearWeaponCargoGlobal _spawnedVehicle;
+clearBackpackCargoGlobal _spawnedVehicle;
 
 _crewGroup deleteGroupWhenEmpty true;
 
@@ -102,15 +108,15 @@ _unloadWP setWaypointBehaviour "SAFE";
 	{
 		_moveWP = (_this # 0) addWaypoint [
 			_this # 1,
-			0.5
+			-1
 		];
 		_moveWP setWaypointStatements [
 			"true",
-			"[this] spawn lambs_wp_fnc_taskReset; [this, 1000] spawn lambs_wp_fnc_taskRush;"
+			format ["[this] spawn lambs_wp_fnc_taskReset; [this, %1] call lambs_wp_fnc_taskRush;", _this # 2]
 		];
 	},
-	[_spawnedCargo, _targetPos],
-	5
+	[_spawnedCargo, _targetPos, _rushradius],
+	1
 ] call CBA_fnc_waitAndExecute;
 
 [_spawnedVehicle, _crewGroup, _spawnedCargo];
