@@ -26,6 +26,6 @@ _veh allowCrewInImmobile true;
 _grp setBehaviour _disposition;
 
 {
-    _grp addWaypoint [_x, .5];
+    _grp addWaypoint [_x, -1];
 } forEach _movePosArr;
 _spawnedTank;
