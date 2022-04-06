@@ -28,11 +28,15 @@ params [
 	["_color", "Default"],
 	["_brush", "Border"]
 ];
-format [
-	"|%1|%2|loc_search|ELLIPSE|%3|0|%4|%5|1", 
-	_name, 
-	_pos, 
-	[_rad, _rad], 
+
+[
+	_name,
+	_pos,
+	"ELLIPSE",
+	[_rad, _rad],
+	"PERSIST",
+	"_BRUSH:",
 	_brush,
+	"COLOR:",
 	_color
-] call BIS_fnc_stringToMarker;
+] call CBA_fnc_createMarker;
