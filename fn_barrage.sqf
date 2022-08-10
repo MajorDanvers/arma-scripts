@@ -1,9 +1,11 @@
 params [
     ["_CENTER_MASS", []],
     ["_ARTY_TYPE", "CUP_B_RM70_CZ"],
+    ["_SIDE", east],
     ["_SPAWN", [0, 0, 0]],
     ["_PRECISION", 1],
     ["_DELAY", 1],
+    ["_ROUNDS", 10],
     ["_LABEL", "RANDOM"]
 ];
 
@@ -23,7 +25,7 @@ private _setDir = vectorNormalized (_CENTER_MASS vectorDiff _SPAWN);
 {
     private _gunners = [
         (_SPAWN vectorAdd [0, 10, 0]),
-        east,
+        _SIDE,
         3
     ] call BIS_fnc_spawnGroup;
     (units _gunners) # 0 moveInAny _x;
@@ -34,10 +36,10 @@ private _setDir = vectorNormalized (_CENTER_MASS vectorDiff _SPAWN);
 {
     [
         {
-            params ["_shot", "_delay"];
-            [_shot # 1, _shot # 0, "", 50, 12, [10 * _delay, 12 * _delay]] spawn BIS_fnc_fireSupport;
+            params ["_shot", "_delay", "_amount", "_prec"];
+            [_shot # 1, _shot # 0, "", 50 * _prec, _amount, [10 * _delay, 12 * _delay]] spawn BIS_fnc_fireSupport;
         },
-        [_x, _DELAY],
+        [_x, _DELAY, _ROUNDS, _PRECISION],
         20
     ] call CBA_fnc_waitAndExecute;
 } forEach [
@@ -60,7 +62,7 @@ if (_LABEL isEqualTo "RANDOM") then {
         deleteMarker _marker;
     },
     [_arty1, _arty2, _arty3, _LABEL],
-    150
+    (12 * _delay * _rounds + 10)
 ] call CBA_fnc_waitAndExecute;
 
-[_LABEL, _CENTER_MASS, "ELLIPSE", [100, 100], "GLOBAL", "COLOR:", "ColorRed", "BRUSH:", "DiagGrid"] call CBA_fnc_createMarker;
+[_LABEL, _CENTER_MASS, "ELLIPSE", [100 * _PRECISION, 100 * _PRECISION], "GLOBAL", "COLOR:", "ColorRed", "BRUSH:", "DiagGrid"] call CBA_fnc_createMarker;
