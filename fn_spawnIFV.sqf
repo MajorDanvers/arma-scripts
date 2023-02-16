@@ -73,26 +73,47 @@ if isNil {_targetPos} then {
 
 _crewGroup deleteGroupWhenEmpty true;
 
-// cargo time
-_spawnedCargo = [
-	_startingPos vectorAdd [0, 10, 0],
-	_side,
-	_cargoGroup
-] call BIS_fnc_spawnGroup;
-_spawnedCargo deleteGroupWhenEmpty true;
-
-{
-	_x moveInAny _spawnedVehicle;
-} forEach (units _spawnedCargo);
-
 // moving
 _unloadWP = _crewGroup addWaypoint [
 	_unloadPos,
 	-1
 ];
 
-_unloadWP setWaypointType "TR UNLOAD";
+if (isNil DNV_fnc_spawnBehind) then {
+    DNV_fnc_spawnBehind = {
+        if (!isServer) exitWith {};
+
+        private _group = _this getVariable ["DNV_groupToSpawn", nil];
+        private _target = _this getVariable ["DNV_rushTarget", nil];
+        
+        private _spawnedCargo = [
+            (getPos (vehicle this)) vectorAdd ((vectorDir (vehicle this)) vectorMultiply -1),
+            side this,
+            _group
+        ] call BIS_fnc_spawnGroup;
+        _spawnedCargo deleteGroupWhenEmpty true;
+        [
+            {
+                _moveWP = (_this # 0) addWaypoint [
+                    _this # 1,
+                    -1
+                ];
+                _moveWP setWaypointStatements [
+                    'true',
+                    '[this] spawn lambs_wp_fnc_taskReset; [this, 1000] spawn lambs_wp_fnc_taskRush;'
+                ];
+            },
+            [_spawnedCargo, _target],
+            5
+        ] call CBA_fnc_waitAndExecute;
+    };
+};
+
 _unloadWP setWaypointBehaviour "CARELESS";
+_unloadWP setWaypointStatements [
+	"true",
+	"(vehicle this) call DNV_fnc_spawnBehind;"
+];
 
 _unloadWP = _crewGroup addWaypoint [
 	_targetPos,
@@ -104,20 +125,4 @@ _unloadWP setWaypointStatements [
 ];
 _unloadWP setWaypointBehaviour "SAFE";
 
-// cargo movers
-[
-	{
-		_moveWP = (_this # 0) addWaypoint [
-			_this # 1,
-			-1
-		];
-		_moveWP setWaypointStatements [
-			"true",
-			"[this] spawn lambs_wp_fnc_taskReset; [this, 1000] spawn lambs_wp_fnc_taskRush;"
-		];
-	},
-	[_spawnedCargo, _targetPos],
-	5
-] call CBA_fnc_waitAndExecute;
-
-[_spawnedVehicle, _crewGroup, _spawnedCargo];
+[_spawnedVehicle, _crewGroup];
