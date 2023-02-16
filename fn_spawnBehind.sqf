@@ -6,9 +6,10 @@ if (!isServer) exitWith {};
 
 private _group = _this getVariable ["DNV_groupToSpawn", nil];
 private _target = _this getVariable ["DNV_rushTarget", nil];
+private _size = -0.5 * (sizeOf _this) - 1;
 
 private _spawnedCargo = [
-    (getPos _this) vectorAdd ((vectorDir _this) vectorMultiply -2),
+    (getPos _this) vectorAdd ((vectorDir _this) vectorMultiply _size),
     side _this,
     _group
 ] call BIS_fnc_spawnGroup;
