@@ -15,8 +15,8 @@ private _flare = createVehicle ["CUP_F_40mm_Star_Red", _flarePos, [], 0, "none"]
 _flare setVelocity [wind select 0, wind select 1, 30];
 
 private _arty1 = _ARTY_TYPE createVehicle _SPAWN;
-private _arty2 = _ARTY_TYPE createVehicle (_SPAWN vectorAdd [10, 0, 0]);
-private _arty3 = _ARTY_TYPE createVehicle (_SPAWN vectorAdd [-10, 0, 0]);
+private _arty2 = _ARTY_TYPE createVehicle (_SPAWN vectorAdd [15, 0, 0]);
+private _arty3 = _ARTY_TYPE createVehicle (_SPAWN vectorAdd [-15, 0, 0]);
 
 private _setDir = vectorNormalized (_CENTER_MASS vectorDiff _SPAWN);
 
