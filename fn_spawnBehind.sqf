@@ -6,7 +6,7 @@ if (!isServer) exitWith {};
 
 private _group = _this getVariable ["DNV_groupToSpawn", nil];
 private _target = _this getVariable ["DNV_rushTarget", nil];
-private _size = -0.5 * (sizeOf _this) - 1;
+private _size = -0.5 * (sizeOf typeOf _this) - 1;
 
 private _spawnedCargo = [
     (getPos _this) vectorAdd ((vectorDir _this) vectorMultiply _size),
