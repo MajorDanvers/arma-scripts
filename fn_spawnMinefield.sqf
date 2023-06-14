@@ -3,6 +3,7 @@
 
 	Description:
 		Spawns a ring of mines around a given position of a given depth.
+        Requires DNV_fnc_poisson.
 
 	Parameter(s):
 		0: Position – Center of minefield
