@@ -29,19 +29,19 @@ params [
     ["_innerRadius", 0, [0]],
     ["_outerRadius", nil, [0]],
     ["_mineAmount", 100, [0]],
-    ["_mineType", "APERSmine", ["What"]]
+    ["_mineType", "APERSmine", [""]]
 ];
 
-private _annulusRatio = (_outerRadius - _innerRadius) / _outerRadius;
-private _fullPoissonAmount = ceil (_mineAmount / _annulusRatio);
-private _innerCutoff = ceil (_fullPoissonAmount * _annulusRatio);
-_mineAmount = _mineAmount + _innerCutoff;
+_innerRadius = _innerRadius / _outerRadius;
+private _fullPoissonAmount = ceil (_mineAmount / (1 - _innerRadius * _innerRadius));
+private _innerIndex = ceil (_fullPoissonAmount - _mineAmount);
+_mineAmount = _mineAmount + _innerIndex;
 
 if (_centerPosition # 2 > 0) then {
     _centerPosition = [_centerPosition # 0, _centerPosition # 1, 0];
 };
 
-for "_i" from _innerCutoff to _mineAmount do
+for "_i" from _innerIndex to _mineAmount do
 {
     private _minePos = [_i, _mineAmount] call DNV_fnc_poisson;
     _minePos = [_minePos # 0, _minePos # 1 * 57.2957795, 0] call CBA_fnc_polar2vect;
