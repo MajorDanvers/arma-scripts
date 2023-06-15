@@ -1,3 +1,20 @@
+/*
+	Author: majDanvers
+
+	Description:
+		TBD
+
+	Parameter(s):
+		0: Number
+		1: Number
+		2: Number
+
+	Returns:
+		Position
+
+	Examples:
+		TBD
+*/
 params [
 	["_sampleIndex", 0, [0]],
 	["_samplesCount", 5, [0]],
