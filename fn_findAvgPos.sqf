@@ -15,7 +15,7 @@
  *
 */
 params [
-	["_units", {alive _x} select allPlayers, [grpNull, []]]
+	["_units", {alive _x} select (call CBA_fnc_players), [grpNull, []]]
 ];
 
 if (_units isEqualType grpNull) then {_units = units _units};
