@@ -11,7 +11,7 @@
         true,
         'forgot to send params'
     ]
-]
+] call DNV_fnc_testFunc
 */
 
 {
