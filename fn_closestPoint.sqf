@@ -8,10 +8,6 @@ params [
 	["_pointSequence", nil, [[]]]
 ];
 
-private _lengthSquared = {
-	vectorMagnitudeSqr ([(_this # 0) # 0, (_this # 0) # 1] vectorDiff [(_this # 1) # 0, (_this # 1) # 1]);
-};
-
 /* shouldn't need this
 private _twod_Diff = {
 	params [
@@ -22,27 +18,30 @@ private _twod_Diff = {
 };
 */
 
-/*
-if (_position isEqualType objNull) then {};
-if (_position isEqualType grpNull) then {};
-*/
+if (_position isEqualType grpNull) then {
+	_position = leader _position;
+};
+
+if (_position isEqualType objNull) then {
+	_position = getPos _position;
+};
 
 private _minDistance = -1;
 private _closestPoint = [0,0];
 
 for "_i" from 0 to (count _pointSequence - 1) do {
-	private _l2 = [_pointSequence # _i, _pointSequence # (_i + 1)] call _lengthSquared;
+	private _l2 = vectorMagnitudeSqr (_pointSequence # _i vectorDiff _pointSequence);
 	private _wv = (_pointSequence # (_i + 1)) vectorDiff (_pointSequence # _i);
 
-	private _scalar = (0 max (1 min (
+	private _scalar = (0 max (1 min ( // clamped to 0 .. 1 to exclude points not on segment
 		(
-            ([_position # 0, _position # 1] vectorDiff _pointSequence # _i)
+            ([_position # 0, _position # 1] vectorDiff (_pointSequence # _i))
 			vectorDotProduct
 			_wv
 		)
 		/ _l2
 	)));
-	private _closestPoint = _wv vectorMultiply _scalar;
+	private _closestPoint = (_pointSequence # _i) vectorAdd (_wv vectorMultiply _scalar);
 	private _distance = _closestPoint vectorDistance _position;
 
 	if (_distance < _minDistance || {_closestPoint # 0 == 0 && _closestPoint # 1 == 0}) then {
