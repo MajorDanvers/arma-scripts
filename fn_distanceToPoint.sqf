@@ -8,6 +8,7 @@ params [
 	["_path", nil, [[]]]
 ];
 
+// parameterization of line segment w + k(v-w), 0 <= k <= 1
 private [
 	"_mult",
 	"_w",
@@ -21,6 +22,7 @@ for "_i" from 0 to (count _path - 2) do {
 		"_k",
 		"_discriminant"
 	];
+	// this is all solving a quadratic
 	_w = _path # _i;
 	_v = _path # (_i + 1);
 	_a = (_v # 0 - _w # 0) ^ 2 + (_v # 1 - _w # 1) ^ 2
@@ -41,4 +43,5 @@ for "_i" from 0 to (count _path - 2) do {
 	if (!isNil {_mult}) exitWith {};
 };
 
+if (isNil {_mult}) exitWith {nil};
 _w vectorAdd ((_v vectorDiff _w) vectorMultiply _mult);
