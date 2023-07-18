@@ -15,6 +15,7 @@ private [
 	"_v"
 ];
 for "_i" from 0 to (count _path - 2) do {
+	scopeName 'path_loop';
 	private [
 		"_a",
 		"_b",
@@ -35,7 +36,7 @@ for "_i" from 0 to (count _path - 2) do {
 	if (_discriminant >= 0) then {
 		_k = (sqr _discriminant - _b) / (2 * _a);
 		if (_k > 0) then {
-			if (_k < 1) exitWith {_mult = _k};
+			if (_k < 1) then {breakOut 'path_loop'};
 			_k = (- _b - sqr _discriminant) / (2 * _a);
 			_mult = _k;
 		};
