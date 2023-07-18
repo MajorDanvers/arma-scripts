@@ -20,7 +20,7 @@ private _minDistance = 1000000;
 private _closestPoint = [0,0];
 
 for "_i" from 0 to (count _pointSequence - 2) do {
-	private _l2 = vectorMagnitudeSqr (_pointSequence # _i vectorDiff _pointSequence # (_i + 1)); // correct
+	private _l2 = vectorMagnitudeSqr (_pointSequence # _i vectorDiff _pointSequence # (_i + 1));
 	private _wv = (_pointSequence # (_i + 1)) vectorDiff (_pointSequence # _i);
 
 	private _scalar = (0 max (1 min ( // clamped to 0 .. 1 to exclude points not on segment
@@ -31,7 +31,7 @@ for "_i" from 0 to (count _pointSequence - 2) do {
 		)
 		/ _l2
 	)));
-	private _thisSegmentClosest = (_pointSequence # _i) vectorAdd (_wv vectorMultiply _scalar); // correct to this point
+	private _thisSegmentClosest = (_pointSequence # _i) vectorAdd (_wv vectorMultiply _scalar);
 	private _distance = _thisSegmentClosest vectorDistance _position;
 
 	if (_distance < _minDistance) then {
