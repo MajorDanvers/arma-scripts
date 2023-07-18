@@ -11,6 +11,20 @@
 			] call DNV_fnc_distanceToPoint
 		},
 		[0,0],
-		'Basic functionality'
+		'Single intercept'
+	],
+	[
+		{
+			[
+				[5,0],
+				5,
+				[
+					[10,5],
+					[-10,-5]
+				]
+			] call DNV_fnc_distanceToPoint
+		},
+		[5,5],
+		'Double intercept, returns first'
 	]
 ] call DNV_fnc_testFunc;
