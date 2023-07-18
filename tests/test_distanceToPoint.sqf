@@ -26,5 +26,21 @@
 		},
 		[5,5],
 		'Double intercept, returns first'
+	],
+	[
+		{
+			isNil {
+				[
+					[0,0],
+					1,
+					[
+						[100,100],
+						[100,101]
+					]
+				] call DNV_fnc_distanceToPoint
+			}
+		},
+		true,
+		'No intercept'
 	]
 ] call DNV_fnc_testFunc;
