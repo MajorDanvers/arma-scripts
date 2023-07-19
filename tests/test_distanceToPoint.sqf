@@ -10,7 +10,7 @@
 				]
 			] call DNV_fnc_distanceToPoint
 		},
-		[0,0],
+		[0,0,0],
 		'Single intercept'
 	],
 	[
@@ -24,7 +24,7 @@
 				]
 			] call DNV_fnc_distanceToPoint
 		},
-		[5,5],
+		[5,5,0],
 		'Double intercept, returns first'
 	],
 	[
