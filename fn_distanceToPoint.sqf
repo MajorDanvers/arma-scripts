@@ -29,16 +29,19 @@ for "_i" from 0 to (count _path - 2) do {
 	_w = _path # _i;
 	_v = _path # (_i + 1);
 	_wv = _v vectorDiff _w;
-	_wc = _w vectorDiff _center;
+	_wc = _center vectorDiff _w;
 	_a = _wv vectorDotProduct _wv;
 	_b = (_wv vectorDotProduct _wc) * 2;
 	_c = (_wc vectorDotProduct _wc) - _radius ^ 2;
 	_discriminant = _b ^ 2 - 4 * _a * _c;
 	if (_discriminant >= 0) then {
-		_k = (sqrt _discriminant - _b) / (2 * _a);
+		_k = (sqrt _discriminant - _b) / (-2 * _a);
 		if (_k > 0) then {
-			if (_k < 1) then {breakOut 'path_loop'};
-			_k = (- _b - sqrt _discriminant) / (2 * _a);
+			if (_k < 1) then {
+                _mult = _k;
+                breakOut 'path_loop';
+            };
+			_k = (- _b - sqrt _discriminant) / (-2 * _a);
 			_mult = _k;
 		};
 	};
