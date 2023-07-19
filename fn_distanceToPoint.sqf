@@ -21,17 +21,18 @@ for "_i" from 0 to (count _path - 2) do {
 		"_b",
 		"_c",
 		"_k",
+		"_wc",
+		"_wv",
 		"_discriminant"
 	];
 	// this is all solving a quadratic
 	_w = _path # _i;
 	_v = _path # (_i + 1);
-	_a = (_v # 0 - _w # 0) ^ 2 + (_v # 1 - _w # 1) ^ 2;
-	_b =	(_w # 0) * (_v # 0 + _center # 0 - _w # 0) - 
-			(_w # 1) * (_w # 1 - _center # 1 - _v # 1) - 
-			(_v # 0) * (_center # 0) - 
-			(_v # 1) * (_center # 1);
-	_c = (_w # 0) ^ 2 + (_center # 0) ^ 2 - _radius ^ 2 + (_w # 1) ^ 2 + (_center # 1) ^ 2 - _w # 0 * _center # 0 - _w # 1 * _center # 1;
+	_wv = _v vectorDiff _w;
+	_wc = _w vectorDiff _center;
+	_a = _wv vectorDotProduct _wv;
+	_b = (_wv vectorDotProduct _wc) * 2;
+	_c = (_wc vectorDotProduct _wc) - _radius ^ 2;
 	_discriminant = _b ^ 2 - 4 * _a * _c;
 	if (_discriminant >= 0) then {
 		_k = (sqrt _discriminant - _b) / (2 * _a);
