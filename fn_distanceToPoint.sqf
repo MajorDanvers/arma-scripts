@@ -26,7 +26,7 @@ for "_i" from 0 to (count _path - 2) do {
 	// this is all solving a quadratic
 	_w = _path # _i;
 	_v = _path # (_i + 1);
-	_a = (_v # 0 - _w # 0) ^ 2 + (_v # 1 - _w # 1) ^ 2
+	_a = (_v # 0 - _w # 0) ^ 2 + (_v # 1 - _w # 1) ^ 2;
 	_b =	(_w # 0) * (_v # 0 + _center # 0 - _w # 0) - 
 			(_w # 1) * (_w # 1 - _center # 1 - _v # 1) - 
 			(_v # 0) * (_center # 0) - 
@@ -34,10 +34,10 @@ for "_i" from 0 to (count _path - 2) do {
 	_c = (_w # 0) ^ 2 + (_center # 0) ^ 2 - _radius ^ 2 + (_w # 1) ^ 2 + (_center # 1) ^ 2 - _w # 0 * _center # 0 - _w # 1 * _center # 1;
 	_discriminant = _b ^ 2 - 4 * _a * _c;
 	if (_discriminant >= 0) then {
-		_k = (sqr _discriminant - _b) / (2 * _a);
+		_k = (sqrt _discriminant - _b) / (2 * _a);
 		if (_k > 0) then {
 			if (_k < 1) then {breakOut 'path_loop'};
-			_k = (- _b - sqr _discriminant) / (2 * _a);
+			_k = (- _b - sqrt _discriminant) / (2 * _a);
 			_mult = _k;
 		};
 	};
