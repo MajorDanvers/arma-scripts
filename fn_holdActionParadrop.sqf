@@ -13,7 +13,7 @@ localNamespace setVariable [
             [player, _teleportPos] call tmf_teleport_fnc_paraDrop;
             removeMissionEventHandler [
                 "MapSingleClick",
-                localNamespace getVariable 'DNV_mapTeleport';
+                localNamespace getVariable 'DNV_mapTeleport'
             ];
         }
     ]
