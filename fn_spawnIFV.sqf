@@ -79,7 +79,7 @@ _crewGroup deleteGroupWhenEmpty true;
 // moving
 _unloadWP = _crewGroup addWaypoint [
 	_unloadPos,
-	-1
+	0
 ];
 
 _unloadWP setWaypointBehaviour "CARELESS";
@@ -90,7 +90,7 @@ _unloadWP setWaypointStatements [
 
 _unloadWP = _crewGroup addWaypoint [
 	_targetPos,
-	-1
+	0	
 ];
 _unloadWP setWaypointStatements [
 	"true",

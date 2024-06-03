@@ -87,7 +87,7 @@ _spawnedCargo deleteGroupWhenEmpty true;
 // moving
 _unloadWP = _crewGroup addWaypoint [
 	_unloadPos,
-	-1
+	0	
 ];
 
 _unloadWP setWaypointType "TR UNLOAD";
@@ -95,7 +95,7 @@ _unloadWP setWaypointBehaviour "CARELESS";
 
 _unloadWP = _crewGroup addWaypoint [
 	_returnPos,
-	-1
+	0	
 ];
 _unloadWP setWaypointStatements [
 	"true",
